@@ -1,6 +1,7 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import UserPost from "./UserPost/UserPost";
+import UserPost from "./UserPost/UserPost"
+import Create from './UserPost/Create';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <h2>Understand Redux Toolkit Using API</h2>
       <Switch>
         <Route path="/" exact component={UserPost} />
+        <Route path="/create" exact component={Create} />
       </Switch>
     </div>
   );

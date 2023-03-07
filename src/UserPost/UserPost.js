@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import LoadingCard from "./LoadingCard";
-import { deletePost, getPost } from "../redux/features/postSlice";
+
 import { Button, Card, Input, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { deletePost, getPost } from "../redux/features/PostSlice";
 
 const UserPost = ({ history }) => {
   const [id, setId] = useState();
