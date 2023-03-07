@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoadingCard from "./LoadingCard";
 
 import { Button, Card, Input, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, getPost } from "../redux/features/PostSlice";
+import {
+  deletePost,
+  getPost,
+  setEdit,
+  updatePost,
+} from "../redux/features/PostSlice";
 
 const UserPost = ({ history }) => {
   const [id, setId] = useState();
   const [bodyText, setBodyText] = useState("");
-  const { loading, post, edit } = useSelector((state) => ({ ...state.app }));
+  const { loading, post, edit, body } = useSelector((state) => ({
+    ...state.app,
+  }));
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setBodyText(body);
+  }, [body]);
   const onChangeInput = (e) => {
     setId(e.target.value);
   };
@@ -68,8 +78,30 @@ const UserPost = ({ history }) => {
                         marginLeft: 5,
                       }}
                     >
-                      <Button type="primary">Save</Button>
-                      <Button>Cancel</Button>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          dispatch(
+                            updatePost({
+                              id: post[0].id,
+                              body: bodyText,
+                              title: post[0].title,
+                            })
+                          );
+                          dispatch(
+                            setEdit({ edit: false, body: post[0].body })
+                          );
+                        }}
+                      >
+                        Save
+                      </Button>
+                      <Button
+                        onClick={() =>
+                          dispatch(setEdit({ edit: false, body: post[0].body }))
+                        }
+                      >
+                        Cancel
+                      </Button>
                     </Space>
                   </>
                 ) : (
@@ -96,7 +128,14 @@ const UserPost = ({ history }) => {
                   Delete
                 </Button>
 
-                <Button type="primary">Edit </Button>
+                <Button
+                  type="primary"
+                  onClick={() =>
+                    dispatch(setEdit({ edit: true, body: post[0].body }))
+                  }
+                >
+                  Edit{" "}
+                </Button>
               </Space>
             </div>
           )}
