@@ -1,10 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getPost = createAsyncThunk("post/getPost", async ({ id }) => {
-  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`).then((res) =>
-    res.json()
-  );
-});
+export const getPost = createAsyncThunk(
+  "post/getPost",
+  async ({ id }, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${id}`
+      );
+
+      const data = await response.json();
+      let responseResult = data;
+      if (response.status === 200) {
+        return responseResult;
+      }
+    } catch (e) {
+      if (e.response && e.response.statusText !== "") {
+        return thunkAPI.rejectWithValue(e.response.statusText);
+      } else return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 export const deletePost = createAsyncThunk(
   "post/deletePost",
@@ -70,9 +85,9 @@ const postSlice = createSlice({
       state.loading = false;
       state.post = [action.payload];
     });
-    builder.addCase(getPost.rejected, (state, action) => {
-      state.loading = true;
-      state.post = action.payload;
+    builder.addCase(getPost.rejected, (state, { payload }) => {
+      console.log(payload);
+      state.loading = false;
     });
     builder.addCase(deletePost.pending, (state, action) => {
       state.loading = true;
