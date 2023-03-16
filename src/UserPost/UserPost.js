@@ -26,7 +26,7 @@ const UserPost = ({ history }) => {
 
   return (
     <div className="container">
-      <h1 style={{ textAlign: "center" }}>Fetch Post</h1>
+      <h1 style={{ textAlign: "center" }}>Fetch Posts</h1>
       <Input
         placeholder="Enter User Id"
         type="number"
@@ -38,10 +38,13 @@ const UserPost = ({ history }) => {
       <br />
       <Space size="middle" style={{ margin: 10 }}>
         <Button type="primary" onClick={fetchUserPost}>
-          Fetch User Post
+          Fetch User Post by ID
         </Button>
         <Button type="primary" onClick={() => history.push("/create")}>
           Create User Post
+        </Button>
+        <Button type="primary" onClick={fetchUserPost}>
+          Fetch All Users
         </Button>
       </Space>
       <br />
