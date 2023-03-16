@@ -2,7 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+<<<<<<< HEAD
 import "antd/dist/antd.min.css";
+=======
+// import "antd/dist/antd.css";
+>>>>>>> ecf4dc2613aa99834568136f941af538a254dc72
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

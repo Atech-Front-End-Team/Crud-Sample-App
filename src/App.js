@@ -1,7 +1,7 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import UserPost from "./UserPost/UserPost"
-import Create from './UserPost/Create';
+import UserPost from "./UserPost/UserPost";
+import Create from "./UserPost/Create";
 
 function App() {
   return (
