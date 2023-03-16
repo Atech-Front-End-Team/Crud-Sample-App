@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Input, Button, Card, Space } from "antd";
-import { createPost } from '../redux/features/PostSlice';
-import{useSelector,useDispatch} from "react-redux"
+import { createPost } from "../redux/features/PostSlice";
+import { useSelector, useDispatch } from "react-redux";
 import LoadingCard from "./LoadingCard";
 
 const CreatePost = ({ history }) => {
   const [values, setValues] = useState({ title: "", body: "" });
 
-   const [showPost, setShowPost] = useState(false);
-   const {post,loading}=useSelector((state)=>({...state.app}))
-   const dispatch=useDispatch()
+  const [showPost, setShowPost] = useState(false);
+  const { post, loading } = useSelector((state) => ({ ...state.app }));
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost({values}))
+    dispatch(createPost({ values }));
     setValues({ title: "", body: "" });
-    setShowPost(true)
+    setShowPost(true);
   };
 
   const showPostBlog = () => {
@@ -69,7 +69,7 @@ const CreatePost = ({ history }) => {
       </form>
       <br />
       <br />
-      {showPost && <div>{showPostBlog()}</div>} 
+      {showPost && <div>{showPostBlog()}</div>}
     </>
   );
 };
